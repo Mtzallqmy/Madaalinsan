@@ -32,6 +32,11 @@ const TYPE_STYLE: Record<MediaFileType, string> = {
   pdf:   "bg-red-50 text-red-500",
 };
 
+function MediaFileIcon({ type }: { type: MediaFileType }) {
+  const Icon = TYPE_ICON[type];
+  return <Icon size={32} />;
+}
+
 export default function AdminMediaPage() {
   return (
     <div className="space-y-5">
@@ -70,7 +75,7 @@ export default function AdminMediaPage() {
                 {isImage ? (
                   <Image src={file.url} alt={file.alt ?? ""} fill className="object-cover" />
                 ) : (
-                  (() => { const FileIcon = TYPE_ICON[file.type]; return <FileIcon size={32} />; })()
+                  <MediaFileIcon type={file.type} />
                 )}
 
 
