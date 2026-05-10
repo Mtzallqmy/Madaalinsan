@@ -1,16 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import { Mail, Send, MessageCircle, CheckCircle, Facebook, Instagram, Twitter, Youtube } from "lucide-react";
+import { Mail, Send, MessageCircle, CheckCircle, Globe, Camera, Video } from "lucide-react";
+import type { ElementType } from "react";
 import { SOCIAL_LINKS } from "@/lib/social-links";
 
-const iconMap: Record<string, React.ElementType> = {
-  Facebook,
-  Instagram,
+const iconMap: Record<string, ElementType> = {
+  Facebook: Globe,
+  Instagram: Camera,
   MessageCircle,
-  Twitter,
+  Twitter: Globe,
   Send,
-  Youtube,
+  Youtube: Video,
   Mail,
 };
 

@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { MAIN_NAV } from "@/lib/navigation";
+import TickerBar from "@/components/ui/TickerBar";
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -27,11 +28,12 @@ export default function Header() {
       className={cn(
         "fixed top-0 right-0 left-0 z-50 transition-all duration-300",
         scrolled
-          ? "bg-navy/98 backdrop-blur-md shadow-lg py-2"
-          : "bg-navy py-3"
+          ? "bg-navy/98 backdrop-blur-md shadow-lg"
+          : "bg-navy"
       )}
     >
-      <div className="max-w-7xl mx-auto px-4 md:px-6">
+      <TickerBar />
+      <div className="max-w-7xl mx-auto px-4 md:px-6 py-3">
         <div className="flex items-center justify-between gap-4">
           {/* الشعار */}
           <Link href="/" className="flex items-center gap-3 shrink-0 group">

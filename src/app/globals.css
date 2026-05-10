@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@400;500;600;700;800;900&family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@300;400;500;700;800;900&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -26,7 +24,7 @@
   }
 
   body {
-    font-family: 'Tajawal', 'Cairo', sans-serif;
+    font-family: var(--font-tajawal), var(--font-cairo), sans-serif;
     background-color: #F5EFE3;
     color: #3E4652;
     -webkit-font-smoothing: antialiased;
@@ -34,12 +32,12 @@
   }
 
   h1, h2, h3 {
-    font-family: 'Cairo', 'Noto Kufi Arabic', sans-serif;
+    font-family: var(--font-cairo), var(--font-kufi), sans-serif;
     font-weight: 700;
   }
 
   h4, h5, h6 {
-    font-family: 'Cairo', sans-serif;
+    font-family: var(--font-cairo), sans-serif;
     font-weight: 600;
   }
 }
@@ -47,27 +45,27 @@
 @layer components {
   .btn-primary {
     @apply inline-flex items-center gap-2 bg-gold text-white px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-300 hover:bg-gold-dark hover:shadow-gold hover:-translate-y-0.5 active:translate-y-0;
-    font-family: 'Cairo', sans-serif;
+    font-family: var(--font-cairo), sans-serif;
   }
 
   .btn-secondary {
     @apply inline-flex items-center gap-2 bg-transparent border-2 border-navy text-navy px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-300 hover:bg-navy hover:text-white active:translate-y-0;
-    font-family: 'Cairo', sans-serif;
+    font-family: var(--font-cairo), sans-serif;
   }
 
   .btn-outline-gold {
     @apply inline-flex items-center gap-2 bg-transparent border-2 border-gold text-gold px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-300 hover:bg-gold hover:text-white;
-    font-family: 'Cairo', sans-serif;
+    font-family: var(--font-cairo), sans-serif;
   }
 
   .btn-urgent {
     @apply inline-flex items-center gap-2 bg-urgent text-white px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-300 hover:bg-urgent-dark hover:shadow-lg hover:-translate-y-0.5;
-    font-family: 'Cairo', sans-serif;
+    font-family: var(--font-cairo), sans-serif;
   }
 
   .btn-hope {
     @apply inline-flex items-center gap-2 bg-hope text-white px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-300 hover:bg-hope-dark hover:shadow-lg hover:-translate-y-0.5;
-    font-family: 'Cairo', sans-serif;
+    font-family: var(--font-cairo), sans-serif;
   }
 
   .card {
@@ -80,17 +78,17 @@
 
   .section-title {
     @apply text-2xl md:text-3xl font-bold text-navy;
-    font-family: 'Cairo', sans-serif;
+    font-family: var(--font-cairo), sans-serif;
   }
 
   .section-subtitle {
     @apply text-text-light text-base;
-    font-family: 'Tajawal', sans-serif;
+    font-family: var(--font-tajawal), sans-serif;
   }
 
   .badge {
     @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold;
-    font-family: 'Cairo', sans-serif;
+    font-family: var(--font-cairo), sans-serif;
   }
 
   .badge-gold {
@@ -115,7 +113,7 @@
 
   .input-field {
     @apply w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-text placeholder:text-text-muted focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20 transition-all duration-200;
-    font-family: 'Tajawal', sans-serif;
+    font-family: var(--font-tajawal), sans-serif;
     direction: rtl;
   }
 
@@ -125,11 +123,11 @@
 
   .label-field {
     @apply block text-sm font-semibold text-navy mb-1.5;
-    font-family: 'Cairo', sans-serif;
+    font-family: var(--font-cairo), sans-serif;
   }
 
   .prose-arabic {
-    font-family: 'Tajawal', sans-serif;
+    font-family: var(--font-tajawal), sans-serif;
     line-height: 2;
     font-size: 1.1rem;
     color: #3E4652;

@@ -142,16 +142,16 @@ export default function ReportForm() {
         {/* رفع صور أو وثائق */}
         <div>
           <label className="label-field">صور أو وثائق (اختياري)</label>
-          <div className="border-2 border-dashed border-gray-200 rounded-xl p-6 text-center hover:border-urgent/30 transition-colors cursor-pointer">
+          <label className="block border-2 border-dashed border-gray-200 rounded-xl p-6 text-center hover:border-urgent/30 transition-colors cursor-pointer focus-within:border-urgent/40 focus-within:ring-2 focus-within:ring-urgent/20">
             <Upload size={22} className="text-urgent/60 mx-auto mb-2" />
             <p className="text-sm text-text-muted font-tajawal">
-              صور، وثائق طبية، أو أي ملفات تدعم البلاغ
+              اضغط لاختيار صور، وثائق طبية، أو ملفات تدعم البلاغ
             </p>
             <p className="text-xs text-text-muted font-tajawal mt-0.5">
               JPG/PNG/PDF - بحد أقصى 10MB
             </p>
-            <input type="file" className="hidden" multiple accept="image/*,.pdf" />
-          </div>
+            <input type="file" className="sr-only" multiple accept="image/*,.pdf" />
+          </label>
         </div>
 
         <button

@@ -1,15 +1,16 @@
 import Link from "next/link";
-import { Mail, Phone, Facebook, Instagram, Send, Youtube, Twitter, MessageCircle } from "lucide-react";
+import { Mail, Globe, Camera, Send, Video, MessageCircle } from "lucide-react";
+import type { ElementType } from "react";
 import { MAIN_NAV } from "@/lib/navigation";
 import { SOCIAL_LINKS } from "@/lib/social-links";
 
-const iconMap: Record<string, React.ElementType> = {
-  Facebook,
-  Instagram,
+const iconMap: Record<string, ElementType> = {
+  Facebook: Globe,
+  Instagram: Camera,
   MessageCircle,
-  Twitter,
+  Twitter: Globe,
   Send,
-  Youtube,
+  Youtube: Video,
   Mail,
 };
 

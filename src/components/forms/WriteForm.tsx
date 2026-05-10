@@ -70,11 +70,11 @@ export default function WriteForm() {
 
           <div>
             <label className="label-field">صورة الكاتب (اختياري)</label>
-            <div className="border-2 border-dashed border-gray-200 rounded-xl p-4 text-center hover:border-gold/40 transition-colors cursor-pointer">
+            <label className="block border-2 border-dashed border-gray-200 rounded-xl p-4 text-center hover:border-gold/40 transition-colors cursor-pointer focus-within:border-gold focus-within:ring-2 focus-within:ring-gold/20">
               <Upload size={18} className="text-gold mx-auto mb-1.5" />
-              <p className="text-xs text-text-muted font-tajawal">صورة شخصية - JPG/PNG</p>
-              <input type="file" className="hidden" accept="image/*" />
-            </div>
+              <p className="text-xs text-text-muted font-tajawal">اضغط لاختيار صورة شخصية - JPG/PNG</p>
+              <input type="file" className="sr-only" accept="image/*" />
+            </label>
           </div>
 
           {/* روابط اجتماعية */}
@@ -119,12 +119,12 @@ export default function WriteForm() {
 
           <div>
             <label className="label-field">صورة غلاف (اختياري)</label>
-            <div className="border-2 border-dashed border-gray-200 rounded-xl p-5 text-center hover:border-gold/40 transition-colors cursor-pointer">
+            <label className="block border-2 border-dashed border-gray-200 rounded-xl p-5 text-center hover:border-gold/40 transition-colors cursor-pointer focus-within:border-gold focus-within:ring-2 focus-within:ring-gold/20">
               <Upload size={20} className="text-gold mx-auto mb-2" />
-              <p className="text-sm text-text-muted font-tajawal">صورة الغلاف - JPG/PNG</p>
+              <p className="text-sm text-text-muted font-tajawal">اضغط لاختيار صورة الغلاف - JPG/PNG</p>
               <p className="text-xs text-text-muted font-tajawal mt-0.5">حجم مناسب: 1200×630 بكسل</p>
-              <input type="file" className="hidden" accept="image/*" />
-            </div>
+              <input type="file" className="sr-only" accept="image/*" />
+            </label>
           </div>
         </div>
 

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Facebook, Instagram, Twitter } from "lucide-react";
+import { Camera, Globe } from "lucide-react";
 import type { Author } from "@/lib/types";
 
 interface AuthorCardProps {
@@ -68,19 +68,19 @@ export default function AuthorCard({ author, articleCount, compact = false }: Au
           {author.social.facebook && (
             <a href={author.social.facebook} target="_blank" rel="noopener noreferrer"
               className="w-8 h-8 rounded-lg bg-navy/10 hover:bg-gold/20 flex items-center justify-center transition-colors">
-              <Facebook size={14} className="text-navy" />
+              <Globe size={14} className="text-navy" />
             </a>
           )}
           {author.social.instagram && (
             <a href={author.social.instagram} target="_blank" rel="noopener noreferrer"
               className="w-8 h-8 rounded-lg bg-navy/10 hover:bg-gold/20 flex items-center justify-center transition-colors">
-              <Instagram size={14} className="text-navy" />
+              <Camera size={14} className="text-navy" />
             </a>
           )}
           {author.social.twitter && (
             <a href={author.social.twitter} target="_blank" rel="noopener noreferrer"
               className="w-8 h-8 rounded-lg bg-navy/10 hover:bg-gold/20 flex items-center justify-center transition-colors">
-              <Twitter size={14} className="text-navy" />
+              <Globe size={14} className="text-navy" />
             </a>
           )}
         </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Link2, Check, Facebook, Twitter, Send, MessageCircle } from "lucide-react";
+import { Link2, Check, Globe, Send, MessageCircle } from "lucide-react";
 
 interface ShareButtonsProps {
   title: string;
@@ -26,13 +26,13 @@ export default function ShareButtons({ title, url }: ShareButtonsProps) {
     {
       label: "فيسبوك",
       href: `https://facebook.com/sharer/sharer.php?u=${encoded}`,
-      icon: Facebook,
+      icon: Globe,
       color: "hover:bg-blue-50 hover:text-blue-600",
     },
     {
       label: "تويتر",
       href: `https://twitter.com/intent/tweet?text=${encodedTitle}&url=${encoded}`,
-      icon: Twitter,
+      icon: Globe,
       color: "hover:bg-gray-100 hover:text-gray-900",
     },
     {

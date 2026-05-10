@@ -125,16 +125,16 @@ export default function SendStoryForm() {
         {/* رفع صور */}
         <div>
           <label className="label-field">صور أو وثائق (اختياري)</label>
-          <div className="border-2 border-dashed border-gray-200 rounded-xl p-6 text-center hover:border-gold/40 transition-colors cursor-pointer">
+          <label className="block border-2 border-dashed border-gray-200 rounded-xl p-6 text-center hover:border-gold/40 transition-colors cursor-pointer focus-within:border-gold focus-within:ring-2 focus-within:ring-gold/20">
             <Upload size={22} className="text-gold mx-auto mb-2" />
             <p className="text-sm text-text-muted font-tajawal">
-              اسحب الملفات هنا أو انقر للاختيار
+              اضغط لاختيار الصور أو الوثائق
             </p>
             <p className="text-xs text-text-muted font-tajawal mt-1">
               صور JPG/PNG أو PDF - بحد أقصى 5MB لكل ملف
             </p>
-            <input type="file" className="hidden" multiple accept="image/*,.pdf" />
-          </div>
+            <input type="file" className="sr-only" multiple accept="image/*,.pdf" />
+          </label>
         </div>
 
         {/* السماح بالنشر */}
