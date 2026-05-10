@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowLeft, BookOpen, PenLine, FolderOpen } from "lucide-react";
+import { BookOpen, PenLine, FolderOpen } from "lucide-react";
 
 export default function HeroSection() {
   return (

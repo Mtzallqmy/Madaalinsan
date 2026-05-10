@@ -6,6 +6,7 @@ import type { Article, Author, Case, Stats } from "./types";
 export const AUTHORS: Author[] = [
   {
     id: "1",
+    slug: "ahmed-almansouri",
     name: "أحمد المنصوري",
     avatar: "https://i.pravatar.cc/150?img=11",
     bio: "صحفي مستقل متخصص في الشأن الإنساني وقضايا النزوح، يعمل في تغطية أوضاع اللاجئين منذ أكثر من عشر سنوات.",
@@ -13,6 +14,7 @@ export const AUTHORS: Author[] = [
   },
   {
     id: "2",
+    slug: "sara-alzahrani",
     name: "سارة الزهراني",
     avatar: "https://i.pravatar.cc/150?img=47",
     bio: "كاتبة وباحثة اجتماعية، تُعنى بقضايا المرأة والطفولة والتعليم في المجتمعات المهمشة.",
@@ -20,6 +22,7 @@ export const AUTHORS: Author[] = [
   },
   {
     id: "3",
+    slug: "khaled-albreeki",
     name: "خالد البريكي",
     avatar: "https://i.pravatar.cc/150?img=33",
     bio: "ناشط حقوقي وكاتب يوثّق حالات الفقر والحرمان، ويسعى لإيصال أصوات المهمشين إلى صانعي القرار.",
@@ -27,6 +30,7 @@ export const AUTHORS: Author[] = [
   },
   {
     id: "4",
+    slug: "noura-alotaibi",
     name: "نورة العتيبي",
     avatar: "https://i.pravatar.cc/150?img=45",
     bio: "معلمة وكاتبة، تؤمن بأن التعليم هو الطريق الوحيد لكسر حلقات الفقر المتوارثة.",
@@ -34,6 +38,7 @@ export const AUTHORS: Author[] = [
   },
   {
     id: "5",
+    slug: "editorial-team",
     name: "هيئة التحرير",
     avatar: "https://i.pravatar.cc/150?img=60",
     bio: "فريق التحرير في مدى الناس.",
@@ -309,4 +314,14 @@ export function getRecentArticles(limit = 6) {
 
 export function getRelatedArticles(currentId: string, category: string, limit = 3) {
   return ARTICLES.filter((a) => a.id !== currentId && a.category === category).slice(0, limit);
+}
+
+
+// ── دوال الكتّاب ──────────────────────────────────────────────────────────
+export function getAuthorBySlug(slug: string) {
+  return AUTHORS.find((a) => a.slug === slug);
+}
+
+export function getArticlesByAuthor(authorId: string) {
+  return ARTICLES.filter((a) => a.author.id === authorId);
 }

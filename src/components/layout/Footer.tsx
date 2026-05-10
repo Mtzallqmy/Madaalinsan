@@ -1,24 +1,15 @@
 import Link from "next/link";
-import { Mail, Phone, Facebook, Instagram, Send, Youtube, Twitter, MessageCircle } from "lucide-react";
+import { Mail } from "lucide-react";
+import SocialIcon from "@/components/ui/SocialIcon";
 import { MAIN_NAV } from "@/lib/navigation";
 import { SOCIAL_LINKS } from "@/lib/social-links";
-
-const iconMap: Record<string, React.ElementType> = {
-  Facebook,
-  Instagram,
-  MessageCircle,
-  Twitter,
-  Send,
-  Youtube,
-  Mail,
-};
 
 export default function Footer() {
   return (
     <footer className="bg-navy text-ivory/80">
-      {/* الجزء الرئيسي */}
       <div className="max-w-7xl mx-auto px-4 md:px-6 pt-14 pb-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-10">
+
           {/* الشعار والوصف */}
           <div className="lg:col-span-1">
             <Link href="/" className="flex items-center gap-3 mb-4 group">
@@ -34,7 +25,7 @@ export default function Footer() {
               منصة إنسانية عربية مستقلة تنقل قصص الناس ورسائلهم وقضاياهم بكرامة ووضوح، حتى يصل الصوت إلى من يهمه الأمر.
             </p>
             <p className="text-gold text-xs font-kufi italic">
-              "نمدّ صوت الإنسان… حتى لا تبقى القصة وحيدة"
+              &quot;نمدّ صوت الإنسان… حتى لا تبقى القصة وحيدة&quot;
             </p>
           </div>
 
@@ -85,7 +76,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* التواصل الاجتماعي */}
+          {/* التواصل */}
           <div>
             <h4 className="text-white font-bold font-cairo text-sm mb-4 pb-2 border-b border-white/10">
               تواصل معنا
@@ -100,22 +91,19 @@ export default function Footer() {
               </a>
             </div>
             <div className="flex flex-wrap gap-2">
-              {SOCIAL_LINKS.map((social) => {
-                const Icon = iconMap[social.icon];
-                return Icon ? (
-                  <a
-                    key={social.id}
-                    href={social.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={social.label}
-                    className="w-9 h-9 rounded-lg bg-white/10 hover:bg-gold/20 flex items-center justify-center transition-all duration-200 hover:scale-110"
-                    title={social.label}
-                  >
-                    <Icon size={15} className="text-ivory/70 hover:text-gold" />
-                  </a>
-                ) : null;
-              })}
+              {SOCIAL_LINKS.map((social) => (
+                <a
+                  key={social.id}
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={social.label}
+                  title={social.label}
+                  className="w-9 h-9 rounded-lg bg-white/10 hover:bg-gold/20 flex items-center justify-center transition-all duration-200 hover:scale-110 text-ivory/70 hover:text-gold"
+                >
+                  <SocialIcon platform={social.id} size={15} />
+                </a>
+              ))}
             </div>
           </div>
         </div>

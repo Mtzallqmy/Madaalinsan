@@ -2,18 +2,25 @@
 const nextConfig = {
   images: {
     remotePatterns: [
+      // صور المحتوى
       {
         protocol: "https",
         hostname: "images.unsplash.com",
+        pathname: "/**",
       },
-      {
-        protocol: "https",
-        hostname: "picsum.photos",
-      },
+      // أفاتارات تجريبية
       {
         protocol: "https",
         hostname: "i.pravatar.cc",
+        pathname: "/**",
       },
+      // Supabase Storage – استبدل xxxx بـ project ID الخاص بك عند الربط
+      // Next.js 14 لا يدعم wildcards في hostname
+      // {
+      //   protocol: "https",
+      //   hostname: "xxxx.supabase.co",
+      //   pathname: "/storage/v1/object/public/**",
+      // },
     ],
   },
 };

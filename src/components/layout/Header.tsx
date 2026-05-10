@@ -25,7 +25,7 @@ export default function Header() {
   return (
     <header
       className={cn(
-        "fixed top-0 right-0 left-0 z-50 transition-all duration-300",
+        "w-full transition-all duration-300",
         scrolled
           ? "bg-navy/98 backdrop-blur-md shadow-lg py-2"
           : "bg-navy py-3"

@@ -1,6 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
-import { Facebook, Instagram, Twitter } from "lucide-react";
+import SocialIcon from "./SocialIcon";
 import type { Author } from "@/lib/types";
 
 interface AuthorCardProps {
@@ -66,21 +65,47 @@ export default function AuthorCard({ author, articleCount, compact = false }: Au
       {author.social && (
         <div className="flex items-center gap-2">
           {author.social.facebook && (
-            <a href={author.social.facebook} target="_blank" rel="noopener noreferrer"
-              className="w-8 h-8 rounded-lg bg-navy/10 hover:bg-gold/20 flex items-center justify-center transition-colors">
-              <Facebook size={14} className="text-navy" />
+            <a
+              href={author.social.facebook}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="فيسبوك"
+              className="w-8 h-8 rounded-lg bg-navy/10 hover:bg-gold/20 flex items-center justify-center transition-colors text-navy hover:text-gold"
+            >
+              <SocialIcon platform="facebook" size={14} />
             </a>
           )}
           {author.social.instagram && (
-            <a href={author.social.instagram} target="_blank" rel="noopener noreferrer"
-              className="w-8 h-8 rounded-lg bg-navy/10 hover:bg-gold/20 flex items-center justify-center transition-colors">
-              <Instagram size={14} className="text-navy" />
+            <a
+              href={author.social.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="إنستغرام"
+              className="w-8 h-8 rounded-lg bg-navy/10 hover:bg-gold/20 flex items-center justify-center transition-colors text-navy hover:text-gold"
+            >
+              <SocialIcon platform="instagram" size={14} />
             </a>
           )}
           {author.social.twitter && (
-            <a href={author.social.twitter} target="_blank" rel="noopener noreferrer"
-              className="w-8 h-8 rounded-lg bg-navy/10 hover:bg-gold/20 flex items-center justify-center transition-colors">
-              <Twitter size={14} className="text-navy" />
+            <a
+              href={author.social.twitter}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="تويتر / X"
+              className="w-8 h-8 rounded-lg bg-navy/10 hover:bg-gold/20 flex items-center justify-center transition-colors text-navy hover:text-gold"
+            >
+              <SocialIcon platform="twitter" size={14} />
+            </a>
+          )}
+          {author.social.telegram && (
+            <a
+              href={author.social.telegram}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="تليجرام"
+              className="w-8 h-8 rounded-lg bg-navy/10 hover:bg-gold/20 flex items-center justify-center transition-colors text-navy hover:text-gold"
+            >
+              <SocialIcon platform="telegram" size={14} />
             </a>
           )}
         </div>

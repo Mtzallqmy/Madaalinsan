@@ -1,42 +1,33 @@
 "use client";
 
 import { useState } from "react";
-import { Mail, Send, MessageCircle, CheckCircle, Facebook, Instagram, Twitter, Youtube } from "lucide-react";
+import { Mail, Send, MessageCircle, CheckCircle } from "lucide-react";
+import SocialIcon from "@/components/ui/SocialIcon";
 import { SOCIAL_LINKS } from "@/lib/social-links";
-
-const iconMap: Record<string, React.ElementType> = {
-  Facebook,
-  Instagram,
-  MessageCircle,
-  Twitter,
-  Send,
-  Youtube,
-  Mail,
-};
 
 const CONTACT_ITEMS = [
   {
-    icon: Mail,
+    Icon: Mail,
     label: "البريد الإلكتروني",
     value: "info@madaalinsan.com",
     href: "mailto:info@madaalinsan.com",
     color: "#C99A3E",
   },
   {
-    icon: MessageCircle,
+    Icon: MessageCircle,
     label: "واتساب",
     value: "للتواصل السريع",
     href: "https://wa.me/967xxxxxxxxx",
     color: "#25D366",
   },
   {
-    icon: Send,
+    Icon: Send,
     label: "تليجرام",
     value: "@madaalinsan",
     href: "https://t.me/madaalinsan",
     color: "#2AABEE",
   },
-];
+] as const;
 
 export default function ContactClient() {
   const [submitted, setSubmitted] = useState(false);
@@ -51,7 +42,7 @@ export default function ContactClient() {
       <div className="max-w-6xl mx-auto px-4 md:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
 
-          {/* نموذج التواصل */}
+          {/* ── نموذج التواصل ── */}
           <div>
             <h2 className="text-xl font-bold font-cairo text-navy mb-6">أرسل رسالة</h2>
 
@@ -69,18 +60,24 @@ export default function ContactClient() {
               <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-card p-7 space-y-5">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="label-field">الاسم <span className="text-urgent">*</span></label>
-                    <input type="text" className="input-field" placeholder="اسمك" required />
+                    <label htmlFor="contactName" className="label-field">
+                      الاسم <span className="text-urgent">*</span>
+                    </label>
+                    <input id="contactName" name="contactName" type="text" className="input-field" placeholder="اسمك" required />
                   </div>
                   <div>
-                    <label className="label-field">البريد الإلكتروني <span className="text-urgent">*</span></label>
-                    <input type="email" className="input-field ltr" placeholder="email@example.com" dir="ltr" required />
+                    <label htmlFor="contactEmail" className="label-field">
+                      البريد الإلكتروني <span className="text-urgent">*</span>
+                    </label>
+                    <input id="contactEmail" name="contactEmail" type="email" className="input-field ltr" placeholder="email@example.com" dir="ltr" required />
                   </div>
                 </div>
 
                 <div>
-                  <label className="label-field">موضوع الرسالة <span className="text-urgent">*</span></label>
-                  <select className="input-field" required defaultValue="">
+                  <label htmlFor="contactSubject" className="label-field">
+                    موضوع الرسالة <span className="text-urgent">*</span>
+                  </label>
+                  <select id="contactSubject" name="contactSubject" className="input-field" required defaultValue="">
                     <option value="" disabled>اختر الموضوع</option>
                     <option>استفسار عام</option>
                     <option>إرسال قصة أو مقال</option>
@@ -92,8 +89,12 @@ export default function ContactClient() {
                 </div>
 
                 <div>
-                  <label className="label-field">الرسالة <span className="text-urgent">*</span></label>
+                  <label htmlFor="contactMessage" className="label-field">
+                    الرسالة <span className="text-urgent">*</span>
+                  </label>
                   <textarea
+                    id="contactMessage"
+                    name="contactMessage"
                     className="textarea-field"
                     placeholder="اكتب رسالتك هنا..."
                     required
@@ -109,7 +110,7 @@ export default function ContactClient() {
             )}
           </div>
 
-          {/* معلومات التواصل */}
+          {/* ── معلومات التواصل ── */}
           <div className="space-y-8">
             <div>
               <h2 className="text-xl font-bold font-cairo text-navy mb-6">طرق التواصل</h2>
@@ -126,7 +127,7 @@ export default function ContactClient() {
                       className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
                       style={{ backgroundColor: `${item.color}15` }}
                     >
-                      <item.icon size={22} style={{ color: item.color }} />
+                      <item.Icon size={22} style={{ color: item.color }} />
                     </div>
                     <div>
                       <div className="font-semibold font-cairo text-navy text-sm group-hover:text-gold transition-colors">
@@ -143,28 +144,26 @@ export default function ContactClient() {
             <div>
               <h3 className="text-base font-bold font-cairo text-navy mb-4">تابعنا على</h3>
               <div className="grid grid-cols-3 gap-3">
-                {SOCIAL_LINKS.map((social) => {
-                  const Icon = iconMap[social.icon];
-                  return Icon ? (
-                    <a
-                      key={social.id}
-                      href={social.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex flex-col items-center gap-2 bg-white rounded-xl p-4 shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-0.5 group"
+                {SOCIAL_LINKS.map((social) => (
+                  <a
+                    key={social.id}
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={social.label}
+                    className="flex flex-col items-center gap-2 bg-white rounded-xl p-4 shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-0.5 group"
+                  >
+                    <div
+                      className="w-10 h-10 rounded-xl flex items-center justify-center transition-transform group-hover:scale-110"
+                      style={{ backgroundColor: `${social.color}15`, color: social.color }}
                     >
-                      <div
-                        className="w-10 h-10 rounded-xl flex items-center justify-center transition-transform group-hover:scale-110"
-                        style={{ backgroundColor: `${social.color}15` }}
-                      >
-                        <Icon size={18} style={{ color: social.color }} />
-                      </div>
-                      <span className="text-xs font-tajawal text-text-muted group-hover:text-navy transition-colors">
-                        {social.label}
-                      </span>
-                    </a>
-                  ) : null;
-                })}
+                      <SocialIcon platform={social.id} size={18} />
+                    </div>
+                    <span className="text-xs font-tajawal text-text-muted group-hover:text-navy transition-colors">
+                      {social.label}
+                    </span>
+                  </a>
+                ))}
               </div>
             </div>
 

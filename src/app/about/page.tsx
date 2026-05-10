@@ -1,3 +1,4 @@
+import Image from "next/image";
 import PageWrapper from "@/components/layout/PageWrapper";
 import PageHero from "@/components/ui/PageHero";
 import { Heart, Eye, Target, Shield, Users, BookOpen } from "lucide-react";
@@ -157,10 +158,12 @@ export default function AboutPage() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
               {TEAM.map((member) => (
                 <div key={member.name} className="text-center">
-                  <img
+                  <Image
                     src={member.avatar}
                     alt={member.name}
-                    className="w-20 h-20 rounded-full object-cover mx-auto mb-4 ring-4 ring-gold/20"
+                    width={80}
+                    height={80}
+                    className="rounded-full object-cover mx-auto mb-4 ring-4 ring-gold/20"
                   />
                   <h3 className="font-bold font-cairo text-navy text-base">{member.name}</h3>
                   <p className="text-gold text-xs font-tajawal mb-3">{member.role}</p>

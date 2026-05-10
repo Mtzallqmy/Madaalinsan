@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { AlertTriangle, CheckCircle, Upload } from "lucide-react";
+import { useState, useRef } from "react";
+import { AlertTriangle, CheckCircle, Upload, FileImage, X } from "lucide-react";
 
 const CASE_TYPES = [
   "حالة فقر حادة",
@@ -15,11 +15,91 @@ const CASE_TYPES = [
 ];
 
 const URGENCY_LEVELS = [
-  { value: "high", label: "عاجل جداً - تهديد للحياة", color: "text-urgent" },
-  { value: "medium", label: "متوسط - يحتاج متابعة قريبة", color: "text-gold-dark" },
-  { value: "low", label: "منخفض - يمكن المتابعة لاحقاً", color: "text-hope" },
+  { value: "high", label: "عاجل جداً — تهديد للحياة", color: "text-urgent" },
+  { value: "medium", label: "متوسط — يحتاج متابعة قريبة", color: "text-gold-dark" },
+  { value: "low", label: "منخفض — يمكن المتابعة لاحقاً", color: "text-hope" },
 ];
 
+// ─── مكوّن رفع الملفات ────────────────────────────────────────────────────
+function FileUploadZone({
+  id,
+  label,
+  hint,
+  accept = "image/*,.pdf",
+}: {
+  id: string;
+  label: string;
+  hint?: string;
+  accept?: string;
+}) {
+  const [files, setFiles] = useState<File[]>([]);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selected = Array.from(e.target.files ?? []);
+    setFiles((prev) => [...prev, ...selected]);
+  };
+
+  const removeFile = (index: number, e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setFiles((prev) => prev.filter((_, i) => i !== index));
+    if (inputRef.current) inputRef.current.value = "";
+  };
+
+  return (
+    <div>
+      <label
+        htmlFor={id}
+        className="block border-2 border-dashed border-gray-200 rounded-xl p-5 text-center cursor-pointer transition-all duration-200 hover:border-urgent/40 focus-within:border-urgent/60"
+      >
+        <Upload size={22} className="text-urgent/60 mx-auto mb-2" />
+        <p className="text-sm text-text-light font-tajawal font-medium">{label}</p>
+        {hint && <p className="text-xs text-text-muted font-tajawal mt-1">{hint}</p>}
+        <span className="inline-block mt-2 px-3 py-1 rounded-full text-xs font-cairo font-semibold bg-urgent/10 text-urgent">
+          اختر ملفاً أو اسحبه هنا
+        </span>
+        <input
+          ref={inputRef}
+          id={id}
+          name={id}
+          type="file"
+          accept={accept}
+          multiple
+          className="sr-only"
+          onChange={handleChange}
+        />
+      </label>
+
+      {files.length > 0 && (
+        <ul className="mt-2 space-y-1.5">
+          {files.map((file, i) => (
+            <li
+              key={`${file.name}-${i}`}
+              className="flex items-center gap-2 bg-ivory rounded-lg px-3 py-2 text-xs font-tajawal text-text"
+            >
+              <FileImage size={13} className="text-urgent/60 shrink-0" />
+              <span className="flex-1 truncate">{file.name}</span>
+              <span className="text-text-muted shrink-0">
+                {(file.size / 1024).toFixed(0)} KB
+              </span>
+              <button
+                type="button"
+                onClick={(e) => removeFile(i, e)}
+                className="text-text-muted hover:text-urgent transition-colors"
+                aria-label="حذف الملف"
+              >
+                <X size={13} />
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+
+// ─── النموذج الرئيسي ─────────────────────────────────────────────────────────
 export default function ReportForm() {
   const [submitted, setSubmitted] = useState(false);
   const [urgency, setUrgency] = useState("medium");
@@ -49,7 +129,9 @@ export default function ReportForm() {
       <div className="flex items-start gap-3 bg-urgent/5 border border-urgent/20 rounded-xl p-4 mb-7">
         <AlertTriangle size={18} className="text-urgent shrink-0 mt-0.5" />
         <div>
-          <p className="text-sm font-bold font-cairo text-urgent mb-0.5">في حالات الخطر الفوري</p>
+          <p className="text-sm font-bold font-cairo text-urgent mb-0.5">
+            في حالات الخطر الفوري
+          </p>
           <p className="text-xs text-text-muted font-tajawal">
             إذا كانت الحالة تهديداً فورياً للحياة، يرجى التواصل مع الجهات الطارئة المحلية أولاً.
           </p>
@@ -64,10 +146,18 @@ export default function ReportForm() {
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-5">
-        {/* نوع الحالة */}
+        {/* ── نوع الحالة ── */}
         <div>
-          <label className="label-field">نوع الحالة <span className="text-urgent">*</span></label>
-          <select className="input-field" required defaultValue="">
+          <label htmlFor="caseType" className="label-field">
+            نوع الحالة <span className="text-urgent">*</span>
+          </label>
+          <select
+            id="caseType"
+            name="caseType"
+            className="input-field"
+            required
+            defaultValue=""
+          >
             <option value="" disabled>اختر نوع الحالة</option>
             {CASE_TYPES.map((t) => (
               <option key={t} value={t}>{t}</option>
@@ -75,10 +165,14 @@ export default function ReportForm() {
           </select>
         </div>
 
-        {/* المنطقة */}
+        {/* ── المنطقة ── */}
         <div>
-          <label className="label-field">المنطقة / المحافظة <span className="text-urgent">*</span></label>
+          <label htmlFor="caseRegion" className="label-field">
+            المنطقة / المحافظة <span className="text-urgent">*</span>
+          </label>
           <input
+            id="caseRegion"
+            name="caseRegion"
             type="text"
             className="input-field"
             placeholder="مثال: محافظة تعز، مديرية الشماخة"
@@ -86,13 +180,16 @@ export default function ReportForm() {
           />
         </div>
 
-        {/* مستوى العاجلية */}
+        {/* ── مستوى العاجلية ── */}
         <div>
-          <label className="label-field">مستوى العاجلية <span className="text-urgent">*</span></label>
+          <label className="label-field">
+            مستوى العاجلية <span className="text-urgent">*</span>
+          </label>
           <div className="space-y-2 mt-2">
             {URGENCY_LEVELS.map((level) => (
               <label
                 key={level.value}
+                htmlFor={`urgency-${level.value}`}
                 className={`flex items-center gap-3 p-3 rounded-xl border-2 cursor-pointer transition-all ${
                   urgency === level.value
                     ? "border-gold bg-gold/5"
@@ -100,6 +197,7 @@ export default function ReportForm() {
                 }`}
               >
                 <input
+                  id={`urgency-${level.value}`}
                   type="radio"
                   name="urgency"
                   value={level.value}
@@ -115,10 +213,14 @@ export default function ReportForm() {
           </div>
         </div>
 
-        {/* وصف الحالة */}
+        {/* ── وصف الحالة ── */}
         <div>
-          <label className="label-field">وصف الحالة <span className="text-urgent">*</span></label>
+          <label htmlFor="caseDescription" className="label-field">
+            وصف الحالة <span className="text-urgent">*</span>
+          </label>
           <textarea
+            id="caseDescription"
+            name="caseDescription"
             className="textarea-field"
             placeholder="صف الحالة بتفاصيل واضحة: من هم المتضررون؟ ما هي المشكلة؟ منذ متى؟ ما هو المطلوب؟"
             required
@@ -126,10 +228,14 @@ export default function ReportForm() {
           />
         </div>
 
-        {/* معلومات التواصل */}
+        {/* ── معلومات التواصل ── */}
         <div>
-          <label className="label-field">معلومات التواصل (اختياري)</label>
+          <label htmlFor="contactInfo" className="label-field">
+            معلومات التواصل (اختياري)
+          </label>
           <input
+            id="contactInfo"
+            name="contactInfo"
             type="text"
             className="input-field"
             placeholder="رقم هاتف أو واتساب للمتابعة"
@@ -139,25 +245,18 @@ export default function ReportForm() {
           </p>
         </div>
 
-        {/* رفع صور أو وثائق */}
+        {/* ── رفع الملفات ── */}
         <div>
           <label className="label-field">صور أو وثائق (اختياري)</label>
-          <div className="border-2 border-dashed border-gray-200 rounded-xl p-6 text-center hover:border-urgent/30 transition-colors cursor-pointer">
-            <Upload size={22} className="text-urgent/60 mx-auto mb-2" />
-            <p className="text-sm text-text-muted font-tajawal">
-              صور، وثائق طبية، أو أي ملفات تدعم البلاغ
-            </p>
-            <p className="text-xs text-text-muted font-tajawal mt-0.5">
-              JPG/PNG/PDF - بحد أقصى 10MB
-            </p>
-            <input type="file" className="hidden" multiple accept="image/*,.pdf" />
-          </div>
+          <FileUploadZone
+            id="caseFiles"
+            label="صور، وثائق طبية، أو أي ملفات تدعم البلاغ"
+            hint="JPG/PNG/PDF — بحد أقصى 10MB لكل ملف"
+            accept="image/*,.pdf"
+          />
         </div>
 
-        <button
-          type="submit"
-          className="w-full btn-urgent justify-center py-3.5 text-base"
-        >
+        <button type="submit" className="w-full btn-urgent justify-center py-3.5 text-base">
           <AlertTriangle size={18} />
           إرسال البلاغ
         </button>

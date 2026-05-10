@@ -2,15 +2,17 @@
 // روابط التواصل الاجتماعي - مدى الناس
 // مكوّن مرن قابل للإدارة من لوحة التحكم
 // ============================================
+import type { SocialPlatformId } from "@/components/ui/SocialIcon";
 
 export interface SocialPlatform {
-  id: string;
+  id: SocialPlatformId;
   name: string;
   label: string;
   url?: string;
   color: string;
   bgColor: string;
-  icon: string; // Lucide icon name
+  /** اسم وصفي للأيقونة (للتوثيق فقط) */
+  icon: string;
 }
 
 export const SOCIAL_LINKS: SocialPlatform[] = [

@@ -48,10 +48,10 @@ const config: Config = {
         },
       },
       fontFamily: {
-        kufi: ["Noto Kufi Arabic", "serif"],
-        cairo: ["Cairo", "sans-serif"],
-        tajawal: ["Tajawal", "sans-serif"],
-        sans: ["Tajawal", "Cairo", "sans-serif"],
+        kufi: ["var(--font-kufi)", "serif"],
+        cairo: ["var(--font-cairo)", "sans-serif"],
+        tajawal: ["var(--font-tajawal)", "sans-serif"],
+        sans: ["var(--font-tajawal)", "var(--font-cairo)", "sans-serif"],
       },
       animation: {
         "ticker": "ticker 40s linear infinite",
