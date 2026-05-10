@@ -1,36 +1,77 @@
-# مدى الناس — منصة إنسانية عربية مستقلة
+# مدى الناس — Madaa Linsan
 
-> "نمدّ صوت الإنسان… حتى لا تبقى القصة وحيدة"
+> منصة إنسانية عربية مستقلة تنقل قصص الناس، مقالاتهم، رسائلهم، وقضاياهم بكرامة ووضوح.
 
-منصة إنسانية عربية مستقلة تنقل قصص الناس، مقالاتهم، رسائلهم، وقضاياهم بكرامة ووضوح.
+[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/Mtzallqmy/Madaalinsan)
+[![Next.js](https://img.shields.io/badge/Next.js-14.2.5-black)](https://nextjs.org)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue)](https://typescriptlang.org)
 
 ---
 
-## 🚀 التشغيل المحلي
+## 📌 فكرة المشروع
+
+**مدى الناس** منصة إنسانية عربية RTL مستقلة مبنية بـ Next.js 14 App Router، تهدف إلى:
+- نشر قصص وأخبار إنسانية من المجتمع
+- متابعة القضايا الإنسانية العاجلة
+- استقبال مقالات الكتّاب المشاركين
+- استقبال بلاغات ورسائل المجتمع
+- لوحة إدارة كاملة (UI جاهز للربط بـ Supabase)
+
+---
+
+## 🛠️ التقنيات
+
+| التقنية | الإصدار | الغرض |
+|---------|---------|-------|
+| Next.js | 14.2.5 | Framework |
+| React | 18 | UI Library |
+| TypeScript | 5.x | Type Safety |
+| Tailwind CSS | 3.4 | Styling |
+| next/font | — | Arabic Fonts (Cairo, Tajawal, Noto Kufi) |
+| lucide-react | 0.395 | Icons |
+| clsx + tailwind-merge | — | Class utilities |
+
+---
+
+## 🚀 طريقة التشغيل
 
 ### المتطلبات
-- Node.js 18+
-- npm أو yarn أو pnpm
+- Node.js 18+ أو 20+
+- npm أو pnpm
 
 ### الخطوات
 
 ```bash
-# 1. استنساخ المشروع
-git clone https://github.com/Mtzallqmy/Madaalinsan.git
-cd Madaalinsan
-
-# 2. تثبيت الحزم
+# 1. تثبيت الحزم
 npm install
 
-# 3. إعداد متغيرات البيئة
+# 2. نسخ متغيرات البيئة
 cp .env.example .env.local
-# ثم عدّل .env.local بقيمك
+# عدّل .env.local بقيمك الخاصة
 
-# 4. تشغيل بيئة التطوير
+# 3. تشغيل بيئة التطوير
 npm run dev
+
+# 4. بناء للإنتاج
+npm run build
+
+# 5. تشغيل الإنتاج
+npm start
 ```
 
-افتح [http://localhost:3000](http://localhost:3000) في المتصفح.
+---
+
+## 🌐 متغيرات البيئة
+
+| المتغير | مطلوب | الوصف |
+|---------|-------|-------|
+| `NEXT_PUBLIC_SITE_URL` | ✅ | رابط الموقع |
+| `DATABASE_URL` | للمستقبل | PostgreSQL connection string |
+| `DIRECT_URL` | للمستقبل | للـ Prisma migrations |
+| `NEXT_PUBLIC_SUPABASE_URL` | للمستقبل | Supabase project URL |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | للمستقبل | Supabase anon key |
+| `SUPABASE_SERVICE_ROLE_KEY` | للمستقبل | Server-only (لا تضعه في Client) |
+| `AUTH_SECRET` | للمستقبل | JWT secret (32+ chars) |
 
 ---
 
@@ -38,113 +79,119 @@ npm run dev
 
 ```
 src/
-├── app/                    # صفحات Next.js App Router
+├── app/
+│   ├── layout.tsx          # Root layout + Arabic fonts
 │   ├── page.tsx            # الصفحة الرئيسية
-│   ├── news/               # الأخبار الإنسانية
-│   ├── life/               # حياة الناس
-│   ├── stories/            # قصة وكفاح
-│   ├── letters/            # رسالة إنسان
-│   ├── issues/             # قضايا وملفات
-│   │   └── [slug]/         # تفاصيل القضية
-│   ├── opinions/           # أقلام الناس
-│   ├── articles/[slug]/    # تفاصيل المقال
-│   ├── send-story/         # أرسل قصتك
-│   ├── write/              # اكتب معنا
-│   ├── report/             # بلّغ عن حالة
+│   ├── globals.css         # Global styles RTL
+│   ├── sitemap.ts          # Dynamic sitemap
+│   ├── robots.ts           # robots.txt
+│   ├── not-found.tsx       # 404
 │   ├── about/              # من نحن
-│   └── contact/            # تواصل معنا
-│
+│   ├── articles/[slug]/    # تفاصيل المقال
+│   ├── authors/[slug]/     # صفحة الكاتب
+│   ├── contact/            # تواصل معنا
+│   ├── issues/             # قضايا وملفات
+│   ├── issues/[slug]/      # تفاصيل القضية
+│   ├── letters/            # رسالة إنسان
+│   ├── life/               # حياة الناس
+│   ├── login/              # تسجيل الدخول (Admin)
+│   ├── news/               # الأخبار الإنسانية
+│   ├── opinions/           # أقلام الناس
+│   ├── report/             # بلّغ عن حالة
+│   ├── send-story/         # أرسل قصتك
+│   ├── stories/            # قصة وكفاح
+│   ├── write/              # اكتب معنا
+│   └── admin/              # لوحة الإدارة (UI)
+│       ├── layout.tsx
+│       ├── page.tsx
+│       ├── articles/
+│       ├── authors/
+│       ├── cases/
+│       ├── categories/
+│       ├── media/
+│       ├── settings/
+│       ├── social-links/
+│       ├── submissions/
+│       └── users/
 ├── components/
-│   ├── layout/             # Header, Footer, PageWrapper
+│   ├── forms/              # نماذج التفاعل
 │   ├── home/               # مكونات الصفحة الرئيسية
-│   ├── forms/              # نماذج الإرسال
-│   └── ui/                 # مكونات مشتركة
-│
+│   ├── layout/             # Header, Footer, PageWrapper
+│   └── ui/                 # مكونات UI قابلة لإعادة الاستخدام
 └── lib/
-    ├── types.ts            # أنواع TypeScript (CMS-ready)
     ├── mock-data.ts        # بيانات تجريبية
-    ├── utils.ts            # دوال مساعدة + SEO
+    ├── navigation.ts       # قوائم التنقل
     ├── sections.ts         # الأقسام الديناميكية
     ├── social-links.ts     # روابط التواصل
-    └── navigation.ts       # قوائم التنقل
+    ├── types.ts            # TypeScript types
+    └── utils.ts            # دوال مساعدة
 ```
 
 ---
 
 ## 🎨 الهوية البصرية
 
-| اللون | الكود | الاستخدام |
-|-------|-------|-----------|
-| كحلي عميق | `#0E1B2A` | Header, النصوص الرئيسية |
-| عاجي دافئ | `#F5EFE3` | الخلفيات |
-| ذهبي هادئ | `#C99A3E` | الأكشن، التمييز |
-| أخضر أمل  | `#2F8F6B` | الإيجابي، الحل |
-| تركواز عميق | `#0F766E` | رسالة إنسان |
-| أحمر ناعم | `#B84C4C` | عاجل، تنبيهات |
+| اللون | المتغير | الاستخدام |
+|-------|---------|-----------|
+| `#0E1B2A` | navy | خلفيات رئيسية |
+| `#F5EFE3` | ivory | خلفيات فاتحة |
+| `#C99A3E` | gold | لون التمييز |
+| `#2F8F6B` | hope | اللون الإيجابي |
+| `#B84C4C` | urgent | العاجل/التحذير |
+| `#0F766E` | teal | اللون الثانوي |
 
-**الخطوط:** Noto Kufi Arabic (عناوين) · Cairo (نصوص) · Tajawal (محتوى)
-
----
-
-## ⚙️ التقنيات
-
-- **Next.js 14** — App Router
-- **TypeScript** — أنواع محكمة CMS-ready
-- **Tailwind CSS** — تصميم سريع
-- **Lucide Icons** — أيقونات نظيفة
-- **CSS Animations** — حركات خفيفة بدون مكتبات ثقيلة
+**الخطوط:** Cairo · Tajawal · Noto Kufi Arabic
 
 ---
 
-## 🔌 الربط المستقبلي مع Supabase
+## 📱 الصفحات الرئيسية
 
-البنية جاهزة للربط مع:
-- **Supabase Database** — قاعدة بيانات للمقالات والقضايا
-- **Supabase Auth** — نظام تسجيل دخول للمحررين
-- **Supabase Storage** — رفع الصور والملفات
-- **Supabase Realtime** — تحديثات مباشرة للقضايا
-
-```typescript
-// مثال: استبدال mock-data بـ Supabase
-import { supabase } from "@/lib/supabase";
-
-export async function getArticles() {
-  const { data } = await supabase
-    .from("articles")
-    .select("*, author(*)")
-    .eq("status", "published")
-    .order("published_at", { ascending: false });
-  return data;
-}
-```
+| الصفحة | المسار |
+|--------|--------|
+| الرئيسية | `/` |
+| الأخبار | `/news` |
+| حياة الناس | `/life` |
+| قصة وكفاح | `/stories` |
+| رسالة إنسان | `/letters` |
+| قضايا وملفات | `/issues` |
+| أقلام الناس | `/opinions` |
+| من نحن | `/about` |
+| تواصل معنا | `/contact` |
+| أرسل قصتك | `/send-story` |
+| اكتب معنا | `/write` |
+| بلّغ عن حالة | `/report` |
+| لوحة الإدارة | `/admin` |
 
 ---
 
-## 📊 لوحة الإدارة (المستقبل)
+## 🔮 المستقبل (CMS الكامل)
 
-هيكل لوحة الإدارة معرّف في `src/lib/navigation.ts`:
-- Dashboard الإحصائيات
-- إدارة المقالات (إضافة/تعديل/نشر/مسودة)
-- إدارة القضايا والحالات
-- إدارة الكتّاب والمحررين
-- إدارة الطلبات الواردة
-- إدارة الأقسام الديناميكية
-- إدارة الوسائط
-- إعدادات SEO لكل صفحة
+الهيكلة جاهزة للربط مع:
+- **Supabase** — قاعدة بيانات PostgreSQL + Storage + Auth
+- **Prisma** — ORM للبيانات
+- **NextAuth.js / Supabase Auth** — تسجيل الدخول
+
+الأنواع (Types) محددة مسبقاً في `src/lib/types.ts` لدعم:
+- Article, Author, Case, Section, Tag
+- MediaItem, SEOMeta, GeoMeta
+- AdminUser, DashboardStats
+- UserRole, ArticleStatus, CaseStatus
 
 ---
 
-## 🌐 النشر على Vercel
+## 📦 النشر على Vercel
 
 ```bash
-# بناء للإنتاج
-npm run build
+# 1. ادفع الكود على GitHub
+git push origin main
 
-# أو نشر مباشر عبر Vercel CLI
-npx vercel --prod
+# 2. اربط المشروع بـ Vercel
+# vercel.com/new → اختر الـ repo
+
+# 3. أضف متغيرات البيئة في Vercel Dashboard
+
+# 4. النشر تلقائي مع كل push
 ```
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new)
 
 ---
 
