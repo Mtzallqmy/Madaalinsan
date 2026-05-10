@@ -148,7 +148,7 @@ export default function AdminSettingsPage() {
 
       {/* Save */}
       <div>
-        <button className="flex items-center gap-2 bg-[#C99A3E] hover:bg-[#A87E2E] text-white text-sm font-semibold font-cairo px-6 py-2.5 rounded-xl transition-colors">
+        <button type="button" className="flex items-center gap-2 bg-[#C99A3E] hover:bg-[#A87E2E] text-white text-sm font-semibold font-cairo px-6 py-2.5 rounded-xl transition-colors">
           <Save size={16} />
           حفظ جميع الإعدادات
         </button>

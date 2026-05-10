@@ -1,3 +1,4 @@
+import Link from "next/link";
 import {
   FileText,
   AlertTriangle,
@@ -118,7 +119,7 @@ export default function AdminDashboardPage() {
         ].map((action) => {
           const Icon = action.icon;
           return (
-            <a
+            <Link
               key={action.label}
               href={action.href}
               className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 flex flex-col items-center gap-3 text-center hover:shadow-md transition-all duration-200 hover:-translate-y-0.5 group"
@@ -130,7 +131,7 @@ export default function AdminDashboardPage() {
                 <Icon size={20} />
               </div>
               <span className="text-sm font-semibold text-[#0E1B2A] font-cairo">{action.label}</span>
-            </a>
+            </Link>
           );
         })}
       </div>

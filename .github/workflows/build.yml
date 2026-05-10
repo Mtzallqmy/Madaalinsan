@@ -2,7 +2,7 @@ name: Build & Lint
 
 on:
   push:
-    branches: [main, develop]
+    branches: [main, develop, cms-phase1, phase1-fixes]
   pull_request:
     branches: [main]
 
@@ -18,10 +18,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install --legacy-peer-deps
 
       - name: Run ESLint
         run: npm run lint
@@ -30,3 +29,5 @@ jobs:
         run: npm run build
         env:
           NEXT_PUBLIC_SITE_URL: https://madaalinsan.com
+          # Prisma غير مستخدم حالياً — بيئة وهمية آمنة
+          DATABASE_URL: "file:./dev.db"
